@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import React from 'react';
 import Head from 'next/head';
+import Layout from "../components/Layout";
 // MUI Core
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -24,7 +25,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
         </ThemeProvider>
       </>
   )

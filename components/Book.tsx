@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
 import {BookI, AuthorI, PhotoI} from '../pages'
-import {Box, SvgIconTypeMap} from "@material-ui/core";
+import {Box, Grid, SvgIconTypeMap} from "@material-ui/core";
 import Image from "next/image";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
 import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import {OverridableComponent} from "@material-ui/core/OverridableComponent";
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 interface Iprops {
     book: BookI,
@@ -12,11 +14,23 @@ interface Iprops {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        title: {
-            font: 'normal normal bold 20px/34px Montserrat',
-            letterSpacing: '0px',
-            color: '#140F29'
+        root: {
+            width: '350px',
+            height: '130px',
+            display: 'flex',
+            margin: '10px'
         },
+        title: {
+            margin: '0',
+        },
+        author: {
+            margin: '10px 0 0 0'
+        },
+        img: {
+            borderRadius: theme.shape.borderRadius,
+            marginRight: '15px',
+            boxShadow: theme.shadows[10]
+        }
 
     }))
 
@@ -24,18 +38,19 @@ const Book: FC<Iprops> = ({book}) => {
     const classes = useStyles()
 
     return (
-        <Box display={'flex'} margin={1} width={350} height={150}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <Box>
-                <Image width={100} height={150} src={book.photos.length > 0 ? book.photos[0].uri : 'https://picsum.photos/id/821/400/300.jpg'} alt={''} placeholder={'blur'}
+        <div className={classes.root}>
+            <div className={classes.img} >
+                <Image width={100} height={'130px'}
+                       src={book.photos.length > 0 ? book.photos[0].uri : 'https://picsum.photos/id/821/400/300.jpg'}
+                       alt={''} placeholder={'blur'}
                        blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkP+X/HwAEIQIhlw1/iQAAAABJRU5ErkJggg=='}/>
-            </Box>
-            <Box display={'flex'} flexDirection={'column'} width={"70%"}>
-                <h1 className={classes.title}>{book.title}</h1>
-                <p>{book.author.name}</p>
-            </Box>
+            </div>
 
-        </Box>
+            <Box display={'flex'} flexDirection={'column'} width={'210px'} margin={'5px 0px 0px 15px'}>
+                <Typography variant={'h6'} className={classes.title}>{book.title}</Typography>
+                <Typography variant={'body1'} className={classes.author}>{book.author.name}</Typography>
+            </Box>
+        </div>
     );
 };
 
