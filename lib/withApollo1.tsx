@@ -9,13 +9,16 @@ import { useRouter } from "next/router";
 import nextWithApollo from "next-with-apollo";
 import {JsonApiLink} from "apollo-link-json-api";
 
-const withApollo = nextWithApollo(
+const jsonApiLink = new JsonApiLink({
+    uri: 'https://jsonapiplayground.reyesoft.com/v2',
+});
+
+
+const withApollo1 = nextWithApollo(
     ({ initialState, headers }) => {
         return new ApolloClient({
             ssrMode: typeof window === "undefined",
-            link: new JsonApiLink({
-                uri: "https://rickandmortyapi.com/graphql",
-            }),
+            link: jsonApiLink as any,
             headers: {
                 ...(headers as Record<string, string>),
             },
@@ -23,7 +26,9 @@ const withApollo = nextWithApollo(
         });
     },
     {
+        // eslint-disable-next-line react/display-name
         render: ({ Page, props }) => {
+            // eslint-disable-next-line react-hooks/rules-of-hooks
             const router = useRouter();
             return (
                 <ApolloProvider client={props.apollo}>
@@ -34,4 +39,4 @@ const withApollo = nextWithApollo(
     }
 );
 
-export default withApollo;
+export default withApollo1;

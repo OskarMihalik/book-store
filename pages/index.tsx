@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {ApolloClient, ApolloQueryResult, InMemoryCache} from '@apollo/client';
+import {ApolloClient, ApolloQueryResult, InMemoryCache, QueryResult} from '@apollo/client';
 import {RestLink} from 'apollo-link-rest';
 import {gql} from '@apollo/client';
 import {JsonApiLink} from "apollo-link-json-api";
@@ -7,13 +7,15 @@ import {useEffect, useState} from "react";
 import React from 'react';
 import {useQuery} from '@apollo/client';
 import client from '../lib/withApollo'
-import {booksQuery as query} from '../queries/booksQuery'
+import {booksQuery, booksQuery as query} from '../queries/booksQuery'
 import Book from "../components/Book";
 import {Box} from "@material-ui/core";
 import {Grid} from "@material-ui/core";
 import Search from "../components/Search";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import withApollo1 from '../lib/withApollo1'
+import {getDataFromTree} from "@apollo/client/react/ssr";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -49,16 +51,11 @@ interface BooksI {
     books: BookI[]
 }
 
-export default function Home() {
+function Home() {
     const classes = useStyles()
 
-    const [books, setBooks] = useState<BooksI>()
-    useEffect(() => {
-        client.query({query}).then((response: ApolloQueryResult<BooksI>) => {
-            console.log(response.data)
-            setBooks(response.data)
-        });
-    }, [])
+    const {data} = useQuery<BooksI>(booksQuery)
+
 // Invoke the query and log the person's name
     return (
         <div className={classes.root}>
@@ -72,15 +69,14 @@ export default function Home() {
                 <Typography variant={'h4'}>Browse</Typography>
             </Box>
             <Box width={'100%'} display={'flex'} flexWrap={'wrap'} justifyContent={'space-between'} padding={'0 10px 0 10px'}>
-                {books?.books.map((book, index)=> {
+                {data?.books.map((book, index)=> {
                     return (
                         <Book key={index} book={book}/>
                     )
                 })}
             </Box>
         </div>
-        // <Grid container={true} direction={'column'}  alignItems={'center'} >
-        //
-        // </Grid>
     )
 }
+
+export default withApollo1(Home, { getDataFromTree })
