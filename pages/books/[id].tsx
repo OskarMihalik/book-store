@@ -50,7 +50,7 @@ const SingleBook = ({query}) => {
                 return {source: photo.uri}
             }))
         }else{
-            return [{source: '../../public/imageNotFound.svg'}]
+            return [{source: '/imageNotFound.svg'}]
         }
     }
 
