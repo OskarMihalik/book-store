@@ -17,38 +17,17 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import withApollo1 from '../lib/withApollo1'
 import {getDataFromTree} from "@apollo/client/react/ssr";
 import Link from 'next/link'
+import BooksI from "../queryInterface/booksI";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            padding: '0% 10% 0% 10%',
             display: 'flex',
             alignItems: 'center',
             flexDirection:'column',
         },
     }),
 );
-
-export interface AuthorI {
-    __typename: string;
-    name: string;
-}
-
-export interface PhotoI {
-    __typename: string;
-    uri: string;
-}
-
-export interface BookI {
-    __typename: string;
-    author: AuthorI;
-    photos: PhotoI[];
-    title: string;
-}
-
-interface BooksI {
-    books: BookI[]
-}
 
 function Home() {
     const classes = useStyles()

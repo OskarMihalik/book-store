@@ -9,6 +9,7 @@ export interface LayoutProps  {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
+            padding: '0% 10% 0% 10%',
             background: theme.palette.background.paper,
             minHeight: '100vh'
         }
