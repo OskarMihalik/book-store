@@ -7,6 +7,7 @@ export const booksQuery = gql`
             id
             author{
                 name
+                id
             }
             photos{
                 uri

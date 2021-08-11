@@ -1,23 +1,16 @@
 import Head from 'next/head'
-import {ApolloClient, ApolloQueryResult, InMemoryCache, QueryResult} from '@apollo/client';
-import {RestLink} from 'apollo-link-rest';
-import {gql} from '@apollo/client';
-import {JsonApiLink} from "apollo-link-json-api";
-import {useEffect, useState} from "react";
 import React from 'react';
 import {useQuery} from '@apollo/client';
-import client from '../lib/withApollo'
 import {booksQuery, booksQuery as query} from '../queries/booksQuery'
 import Book from "../components/Book";
 import {Box} from "@material-ui/core";
-import {Grid} from "@material-ui/core";
 import Search from "../components/Search";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import withApollo1 from '../lib/withApollo1'
 import {getDataFromTree} from "@apollo/client/react/ssr";
-import Link from 'next/link'
 import BooksI from "../queryInterface/booksI";
+import AuthorList from "../components/AuthorList";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -26,6 +19,10 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: 'center',
             flexDirection:'column',
         },
+        booksAuthors: {
+            display: 'flex',
+
+        }
     }),
 );
 
@@ -46,13 +43,17 @@ function Home() {
             <Box alignSelf={'flex-start'} marginLeft={'15px'}>
                 <Typography variant={'h4'}>Browse</Typography>
             </Box>
-            <Box width={'100%'} display={'flex'} flexWrap={'wrap'} justifyContent={'space-between'} padding={'0 10px 0 10px'}>
-                {data?.books.map((book, index)=> {
-                    return (
-                        <Book key={index} book={book}/>
-                    )
-                })}
-            </Box>
+            <div className={classes.booksAuthors}>
+                <Box width={'100%'} display={'flex'} flexWrap={'wrap'} justifyContent={'space-between'} padding={'0 10px 0 10px'}>
+                    {data?.books.map((book, index)=> {
+                        return (
+                            <Book key={index} book={book}/>
+                        )
+                    })}
+                </Box>
+                <AuthorList/>
+            </div>
+
         </div>
     )
 }

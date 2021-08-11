@@ -14,10 +14,15 @@ export interface Store {
     name: string;
 }
 
+interface Chapter {
+    __typename: string,
+    title: string,
+}
+
 export interface Book {
     __typename: string;
     author: Author;
-    chapters: any[];
+    chapters: Chapter[];
     photos: Photo[];
     stores: Store[];
     title: string;

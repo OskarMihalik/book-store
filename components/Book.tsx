@@ -1,11 +1,7 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Box, Grid, SvgIconTypeMap} from "@material-ui/core";
+import React, {FC} from 'react';
+import {Box} from "@material-ui/core";
 import Image from "next/image";
 import {createStyles, makeStyles, Theme} from "@material-ui/core/styles";
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import {OverridableComponent} from "@material-ui/core/OverridableComponent";
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Link from 'next/link'
 import {BookI} from "../queryInterface/booksI";
 
@@ -49,23 +45,14 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Book: FC<Iprops> = ({book}) => {
     const classes = useStyles()
-    const [photoUri, setPhotoUri] = useState('')
-    useEffect(()=>{
-        // book.photos ?
-    }, [])
 
     return (
         <div className={classes.root}>
             <div className={classes.imgDiv} >
                 <Image width={100} height={'130px'}
-                     onError={()=>{
-                         setPhotoUri('../public/imageNotFound.svg')
-                     }}
                        className={classes.img}
-                       src={photoUri}
+                       src={book.photos.length > 0 ? book.photos[0].uri : '/imageNotFound.svg'}
                        alt={''}
-                     // placeholder={'blur'}
-                       // blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkP+X/HwAEIQIhlw1/iQAAAABJRU5ErkJggg=='}
                 />
             </div>
             <Box display={'flex'} flexDirection={'column'} width={'210px'} margin={'5px 0px 0px 15px'}>

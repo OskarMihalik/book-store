@@ -8,18 +8,26 @@ import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import SingleBookI from "../../queryInterface/SingleBookI";
-import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
-import imageNotFound from '../../public/imageNotFound.svg'
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            padding: '20px 20% 0px 20%',
+            minWidth: '380px'
         },
         imgContainer: {
-            display: 'flex',
+            marginBottom: '50px'
+        },
+        adressContainer:{
+            backgroundColor: theme.palette.info.main,
+            borderRadius: theme.shape.borderRadius,
+            maxWidth: '360px',
+            padding: '10px 20px 10px 20px'
         }
+
     }),
 );
 
@@ -33,6 +41,7 @@ interface MediaI {
 
 // @ts-ignore
 const SingleBook = ({query}) => {
+    const classes = useStyles()
     const id = get(query, 'id')
 
     const returnPictures = (): MediaI[] | undefined=>{
@@ -50,11 +59,32 @@ const SingleBook = ({query}) => {
             id,
         }
     })
+
     return (
-        <div>
-            <AwesomeSlider
-                media={returnPictures()}
-            />
+        <div className={classes.root}>
+            <div className={classes.imgContainer}>
+                <AwesomeSlider
+                    media={returnPictures()}
+                />
+            </div>
+            <Typography variant={'h4'}>Title: {data?.book.title}</Typography>
+            <Typography variant={'h5'}>Author: {data?.book.author.name}</Typography>
+            <Typography variant={'h5'}>Chapters: {data?.book.chapters.map((chapter)=>{
+                return(`${chapter.title.match(/\d+/)} `)
+            })}
+            </Typography>
+            <Typography variant={'h5'}>Where to Buy:</Typography>
+            <div className={classes.adressContainer}>
+                {data?.book.stores.map((store, index)=>{
+                    return(
+                        <div key={index}>
+                            <Typography variant={'h6'}>{store.name}</Typography>
+                            <Typography variant={'h6'}>{store.address}</Typography>
+                        </div>
+                    )
+                })}
+            </div>
+
         </div>
     );
 };
