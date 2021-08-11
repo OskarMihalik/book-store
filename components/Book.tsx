@@ -7,6 +7,7 @@ import PhotoCameraIcon from '@material-ui/icons/PhotoCamera';
 import {OverridableComponent} from "@material-ui/core/OverridableComponent";
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Link from 'next/link'
 
 interface Iprops {
     book: BookI,
@@ -21,10 +22,20 @@ const useStyles = makeStyles((theme: Theme) =>
             margin: '10px'
         },
         title: {
-            margin: '0',
+            margin: theme.typography.h6.margin,
+            fontFamily: theme.typography.h6.fontFamily,
+            fontWeight: theme.typography.h6.fontWeight,
+            fontSize: theme.typography.h6.fontSize,
+            lineHeight: theme.typography.h6.lineHeight,
+            letterSpacing: theme.typography.h6.letterSpacing
         },
         author: {
-            margin: '10px 0 0 0'
+            margin: '10px 0 0 0',
+            fontFamily: theme.typography.body1.fontFamily,
+            fontWeight: theme.typography.body1.fontWeight,
+            fontSize: theme.typography.body1.fontSize,
+            lineHeight: theme.typography.body1.lineHeight,
+            letterSpacing: theme.typography.body1.letterSpacing
         },
         img: {
             borderRadius: theme.shape.borderRadius,
@@ -47,12 +58,15 @@ const Book: FC<Iprops> = ({book}) => {
             </div>
 
             <Box display={'flex'} flexDirection={'column'} width={'210px'} margin={'5px 0px 0px 15px'}>
-                <Typography variant={'h6'} className={classes.title}>{book.title}</Typography>
-                <Typography variant={'body1'} className={classes.author}>{book.author.name}</Typography>
+                <Link href={'/'} passHref={true}>
+                    <a className={classes.title}>{book.title}</a>
+                </Link>
+                <Link href={'/'} passHref>
+                    <a className={classes.author}>{book.author.name}</a>
+                </Link>
             </Box>
         </div>
     );
 };
-
 
 export default Book;

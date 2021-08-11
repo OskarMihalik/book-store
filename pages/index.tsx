@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import withApollo1 from '../lib/withApollo1'
 import {getDataFromTree} from "@apollo/client/react/ssr";
+import Link from 'next/link'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,8 +28,6 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-
-
 
 export interface AuthorI {
     __typename: string;
