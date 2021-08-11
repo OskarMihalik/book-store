@@ -37,12 +37,14 @@ const useStyles = makeStyles((theme: Theme) =>
             lineHeight: theme.typography.body1.lineHeight,
             letterSpacing: theme.typography.body1.letterSpacing
         },
-        img: {
+        imgDiv: {
             borderRadius: theme.shape.borderRadius,
             marginRight: '15px',
-            boxShadow: theme.shadows[10]
+            boxShadow: theme.shadows[10],
+        },
+        img:{
+            borderRadius: theme.shape.borderRadius,
         }
-
     }))
 
 const Book: FC<Iprops> = ({book}) => {
@@ -50,8 +52,9 @@ const Book: FC<Iprops> = ({book}) => {
 
     return (
         <div className={classes.root}>
-            <div className={classes.img} >
+            <div className={classes.imgDiv} >
                 <Image width={100} height={'130px'}
+                       className={classes.img}
                        src={book.photos.length > 0 ? book.photos[0].uri : 'https://picsum.photos/id/821/400/300.jpg'}
                        alt={''} placeholder={'blur'}
                        blurDataURL={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkP+X/HwAEIQIhlw1/iQAAAABJRU5ErkJggg=='}/>
