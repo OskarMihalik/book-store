@@ -9,9 +9,11 @@ export interface LayoutProps  {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            padding: '0% 10% 0% 10%',
+            padding: '0% 10% 30px 10%',
             background: theme.palette.background.paper,
-            minHeight: '100vh'
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column'
         }
     }),
 );
@@ -20,9 +22,9 @@ const Layout = (props: LayoutProps) => {
     const classes = useStyles()
 
     return (
-        <Grid container direction={'column'} className={classes.root}>
+        <div className={classes.root}>
             {props.children}
-        </Grid>
+        </div>
     );
 };
 

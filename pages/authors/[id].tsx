@@ -5,7 +5,7 @@ import {getDataFromTree} from "@apollo/client/react/ssr";
 import {useQuery} from "@apollo/client";
 import authorInfoQuery from "../../queries/authorInfoQuery";
 import {AuthorsInfosI} from "../../queryInterface/AuthorInfoI";
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
+import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import Link from 'next/link'
 import AwesomeSlider from "react-awesome-slider";
@@ -17,6 +17,22 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'column',
             minWidth: '380px'
+        },
+        link: {
+            margin: '0px 0 10px 0',
+            fontFamily: theme.typography.h6.fontFamily,
+            fontWeight: theme.typography.h6.fontWeight,
+            fontSize: theme.typography.h6.fontSize,
+            lineHeight: theme.typography.h6.lineHeight,
+            letterSpacing: theme.typography.h6.letterSpacing
+        },
+        heading: {
+            margin: '0px 0 10px 0',
+            fontFamily: theme.typography.h6.fontFamily,
+            fontWeight: theme.typography.h6.fontWeight,
+            fontSize: theme.typography.h6.fontSize,
+            lineHeight: theme.typography.h6.lineHeight,
+            letterSpacing: theme.typography.h6.letterSpacing
         },
     }),
 );
@@ -36,12 +52,12 @@ const AuthorInfo: FC = ({query}) => {
         }
     })
 
-    const returnPictures = (): MediaI[] | undefined=>{
+    const returnPictures = (): MediaI[] | undefined => {
         if (data?.author.photos) {
             return (data?.author.photos.map((photo) => {
                 return {source: photo.uri}
             }))
-        }else{
+        } else {
             return [{source: '/imageNotFound.svg'}]
         }
     }
@@ -51,20 +67,22 @@ const AuthorInfo: FC = ({query}) => {
             <AwesomeSlider
                 media={returnPictures()}
             />
-            <Typography variant={'h5'}>Name</Typography>
-            <a>{data?.author.name}</a>
-            <Typography variant={'h5'}>Birthplace</Typography>
-            <a>{data?.author.birthplace}</a>
-            <Typography variant={'h5'}>Date of birth</Typography>
-            <a>{data?.author.date_of_birth}</a>
-            <Typography variant={'h5'}>Date of death</Typography>
-            <a>{data?.author.date_of_death}</a>
-            <Typography variant={'h5'}>Date of death</Typography>
-            {data?.author.books.map((book)=>{
-                return(
-                    <div key={book.id}>
-                        <a>{book.title}</a>
-                    </div>
+            <Typography variant={'h4'}>Name</Typography>
+            <Link href={`/authors/${data?.author.id}`}>
+                <a className={classes.link}>{data?.author.name}</a>
+            </Link>
+            <Typography variant={'h4'}>Birthplace</Typography>
+            <a className={classes.link}>{data?.author.birthplace}</a>
+            <Typography variant={'h4'}>Date of birth</Typography>
+            <a className={classes.link}>{data?.author.date_of_birth}</a>
+            <Typography variant={'h4'}>Date of death</Typography>
+            <a className={classes.link}>{data?.author.date_of_death}</a>
+            <Typography variant={'h4'}>Books</Typography>
+            {data?.author.books.map((book) => {
+                return (
+                    <Link href={`/books/${book.id}`} key={book.id}>
+                        <a className={classes.link}>{book.title}</a>
+                    </Link>
                 )
             })}
         </div>
