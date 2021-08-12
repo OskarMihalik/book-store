@@ -42,24 +42,26 @@ const AuthorInfo: FC = ({query}) => {
             <AwesomeSlider
                 media={returnPictures()}
             />
-            <Typography variant={'h4'}>Name</Typography>
-            <Link href={`/authors/${data?.author.id}`}>
-                <a className={classes.link}>{data?.author.name}</a>
-            </Link>
-            <Typography variant={'h4'}>Birthplace</Typography>
-            <a className={classes.link}>{data?.author.birthplace}</a>
-            <Typography variant={'h4'}>Date of birth</Typography>
-            <a className={classes.link}>{data?.author.date_of_birth}</a>
-            <Typography variant={'h4'}>Date of death</Typography>
-            <a className={classes.link}>{data?.author.date_of_death}</a>
-            <Typography variant={'h4'}>Books</Typography>
-            {data?.author.books.map((book) => {
-                return (
-                    <Link href={`/books/${book.id}`} key={book.id}>
-                        <a className={classes.link}>{book.title}</a>
-                    </Link>
-                )
-            })}
+            <div className={classes.textContainer}>
+                <Typography variant={'h4'}>Name</Typography>
+                <Link href={`/authors/${data?.author.id}`}>
+                    <a className={classes.link}>{data?.author.name}</a>
+                </Link>
+                <Typography variant={'h4'}>Birthplace</Typography>
+                <a className={classes.link}>{data?.author.birthplace}</a>
+                <Typography variant={'h4'}>Date of birth</Typography>
+                <a className={classes.link}>{data?.author.date_of_birth}</a>
+                <Typography variant={'h4'}>Date of death</Typography>
+                <a className={classes.link}>{data?.author.date_of_death}</a>
+                <Typography variant={'h4'}>Books</Typography>
+                {data?.author.books.map((book) => {
+                    return (
+                        <Link href={`/books/${book.id}`} key={book.id}>
+                            <a className={classes.link}>{book.title}</a>
+                        </Link>
+                    )
+                })}
+            </div>
         </div>
     );
 };

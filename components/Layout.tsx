@@ -8,7 +8,7 @@ export interface LayoutProps  {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        root: {
+        rootLayout: {
             padding: '0% 10% 30px 10%',
             background: theme.palette.background.paper,
             minHeight: '100vh',
@@ -22,7 +22,7 @@ const Layout = (props: LayoutProps) => {
     const classes = useStyles()
 
     return (
-        <div className={classes.root}>
+        <div className={classes.rootLayout}>
             {props.children}
         </div>
     );

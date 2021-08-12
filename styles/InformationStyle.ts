@@ -5,7 +5,13 @@ export const useInformationStyles = makeStyles((theme: Theme) =>
         root: {
             display: 'flex',
             flexDirection: 'column',
-            minWidth: '380px'
+            minWidth: '380px',
+            maxWidth: '900px',
+            // margin: '30px auto 30px auto'
+            margin: '30px 0 30px 0'
+        },
+        textContainer: {
+            marginTop: '50px'
         },
         link: {
             margin: '0px 0 10px 0',

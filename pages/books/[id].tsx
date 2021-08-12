@@ -21,7 +21,7 @@ interface MediaI {
 }
 
 // @ts-ignore
-const SingleBook = ({query}) => {
+const SingleBook:FC = ({query}) => {
     const classes = useInformationStyles()
     const id = get(query, 'id')
 
@@ -46,24 +46,25 @@ const SingleBook = ({query}) => {
             <AwesomeSlider
                 media={returnPictures()}
             />
-            <Typography variant={'h4'}>Title</Typography>
-            <a className={classes.link}>{data?.book.title}</a>
-            <Typography variant={'h4'}>Author</Typography>
-            <Link href={`/authors/${data?.book.author.id}`}>
-                <a className={classes.link}>{data?.book.author.name}</a>
-            </Link>
-            <Typography variant={'h4'}>Chapters</Typography>
-            <a className={classes.link}>{data?.book.chapters[0].title.match(/\d+/)}</a>
-            <Typography variant={'h5'}>Where to Buy</Typography>
-            {data?.book.stores.map((store, index) => {
-                return (
-                    <div key={index}>
-                        <a className={classes.link}>{store.name}</a>
-                        <a className={classes.link}>{store.address}</a>
-                    </div>
-                )
-            })}
-
+            <div className={classes.textContainer}>
+                <Typography variant={'h4'}>Title</Typography>
+                <a className={classes.link}>{data?.book.title}</a>
+                <Typography variant={'h4'}>Author</Typography>
+                <Link href={`/authors/${data?.book.author.id}`}>
+                    <a className={classes.link}>{data?.book.author.name}</a>
+                </Link>
+                <Typography variant={'h4'}>Chapters</Typography>
+                <a className={classes.link}>{data?.book.chapters[0].title.match(/\d+/)}</a>
+                <Typography variant={'h5'}>Where to Buy</Typography>
+                {data?.book.stores.map((store, index) => {
+                    return (
+                        <div key={index}>
+                            <a className={classes.link}>{store.name}</a>
+                            <a className={classes.link}>{store.address}</a>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     );
 };
