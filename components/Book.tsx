@@ -12,7 +12,7 @@ interface Iprops {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            width: '350px',
+            minWidth: '350px',
             height: '130px',
             display: 'flex',
             margin: '10px'
@@ -59,7 +59,7 @@ const Book: FC<Iprops> = ({book}) => {
                 <Link href={`/books/${book.id}`} passHref={true}>
                     <a className={classes.title}>{book.title}</a>
                 </Link>
-                <Link href={'/'} passHref>
+                <Link href={`/authors/${book.author.id}`} passHref>
                     <a className={classes.author}>{book.author.name}</a>
                 </Link>
             </Box>

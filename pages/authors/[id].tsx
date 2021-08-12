@@ -5,12 +5,12 @@ import {getDataFromTree} from "@apollo/client/react/ssr";
 import {useQuery} from "@apollo/client";
 import authorInfoQuery from "../../queries/authorInfoQuery";
 import {AuthorsInfosI} from "../../queryInterface/AuthorInfoI";
-import {makeStyles, Theme, createStyles} from '@material-ui/core/styles';
 import Typography from "@material-ui/core/Typography";
 import Link from 'next/link'
 import AwesomeSlider from "react-awesome-slider";
 import 'react-awesome-slider/dist/styles.css';
 import {useInformationStyles} from "../../styles/InformationStyle";
+import BackButton from "../../components/BackButton";
 
 interface MediaI {
     source: string
@@ -62,6 +62,7 @@ const AuthorInfo: FC = ({query}) => {
                     )
                 })}
             </div>
+            <BackButton/>
         </div>
     );
 };

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: '2px 4px 2px 4px',
             display: 'flex',
             flexDirection: 'column',
-            marginLeft: '20px'
+            marginLeft: '20px',
         },
         authorContainer: {
             display: 'flex',
@@ -44,11 +44,10 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-
-
 const AuthorList:FC = ()=> {
     const classes = useStyles()
     const {data} = useQuery<Authors>(authorsQuery)
+
     return (
         <div className={classes.root}>
             <Typography variant={'h4'}>Authors</Typography>
@@ -67,7 +66,6 @@ const AuthorList:FC = ()=> {
                         <Link href={`/authors/${author.id}`} passHref>
                             <a className={classes.authorLink}>{author.name}</a>
                         </Link>
-
                     </div>
                 )
             })}

@@ -7,14 +7,13 @@ export const useInformationStyles = makeStyles((theme: Theme) =>
             flexDirection: 'column',
             minWidth: '380px',
             maxWidth: '900px',
-            // margin: '30px auto 30px auto'
             margin: '30px 0 30px 0'
         },
         textContainer: {
             marginTop: '50px'
         },
         link: {
-            margin: '0px 0 10px 0',
+            margin: '0px 0 0px 0',
             fontFamily: theme.typography.h6.fontFamily,
             fontWeight: theme.typography.h6.fontWeight,
             fontSize: theme.typography.h6.fontSize,
@@ -22,7 +21,7 @@ export const useInformationStyles = makeStyles((theme: Theme) =>
             letterSpacing: theme.typography.h6.letterSpacing
         },
         heading: {
-            margin: '0px 0 10px 0',
+            margin: '0px 0 0px 0',
             fontFamily: theme.typography.h6.fontFamily,
             fontWeight: theme.typography.h6.fontWeight,
             fontSize: theme.typography.h6.fontSize,

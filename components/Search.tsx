@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import { TextField } from '@material-ui/core';
 import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -25,10 +25,13 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Search = () => {
-    const classes = useStyles()
+interface Iprops{
+    filterStr: string;
+    setFilterStr: Dispatch<SetStateAction<string>>
+}
 
-    const [filterStr, setFilterStr] = useState('')
+const Search:FC<Iprops> = ({filterStr, setFilterStr}) => {
+    const classes = useStyles()
 
     return (
         <Paper variant={'outlined'} className={classes.root}>

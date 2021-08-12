@@ -17,7 +17,7 @@ export interface BookI {
     id: string
 }
 
-interface BooksI {
+export interface BooksI {
     books: BookI[]
 }
 
