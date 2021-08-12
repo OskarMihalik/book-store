@@ -1,6 +1,7 @@
 export interface Author {
     __typename: string;
     name: string;
+    id: string;
 }
 
 export interface Photo {

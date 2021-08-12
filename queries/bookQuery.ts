@@ -5,6 +5,7 @@ import {gql} from "@apollo/client";
         book(id: $id) @jsonapi(path: "/books/{args.id}?include=author,photos,chapters,stores") {
             title
             author{
+                id
                 name
             }
             photos{

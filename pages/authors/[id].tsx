@@ -10,32 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from 'next/link'
 import AwesomeSlider from "react-awesome-slider";
 import 'react-awesome-slider/dist/styles.css';
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            display: 'flex',
-            flexDirection: 'column',
-            minWidth: '380px'
-        },
-        link: {
-            margin: '0px 0 10px 0',
-            fontFamily: theme.typography.h6.fontFamily,
-            fontWeight: theme.typography.h6.fontWeight,
-            fontSize: theme.typography.h6.fontSize,
-            lineHeight: theme.typography.h6.lineHeight,
-            letterSpacing: theme.typography.h6.letterSpacing
-        },
-        heading: {
-            margin: '0px 0 10px 0',
-            fontFamily: theme.typography.h6.fontFamily,
-            fontWeight: theme.typography.h6.fontWeight,
-            fontSize: theme.typography.h6.fontSize,
-            lineHeight: theme.typography.h6.lineHeight,
-            letterSpacing: theme.typography.h6.letterSpacing
-        },
-    }),
-);
+import {useInformationStyles} from "../../styles/InformationStyle";
 
 interface MediaI {
     source: string
@@ -43,7 +18,7 @@ interface MediaI {
 
 // @ts-ignore
 const AuthorInfo: FC = ({query}) => {
-    const classes = useStyles()
+    const classes = useInformationStyles()
 
     const id = get(query, 'id')
     const {data} = useQuery<AuthorsInfosI>(authorInfoQuery, {

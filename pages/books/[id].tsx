@@ -9,27 +9,8 @@ import AwesomeSlider from 'react-awesome-slider';
 import 'react-awesome-slider/dist/styles.css';
 import SingleBookI from "../../queryInterface/SingleBookI";
 import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            display: 'flex',
-            flexDirection: 'column',
-            padding: '20px 20% 0px 20%',
-            minWidth: '380px'
-        },
-        imgContainer: {
-            marginBottom: '50px'
-        },
-        adressContainer:{
-            backgroundColor: theme.palette.info.main,
-            borderRadius: theme.shape.borderRadius,
-            maxWidth: '360px',
-            padding: '10px 20px 10px 20px'
-        }
-
-    }),
-);
+import {useInformationStyles} from "../../styles/InformationStyle";
+import Link from 'next/link'
 
 interface BookId {
     id: string;
@@ -41,15 +22,15 @@ interface MediaI {
 
 // @ts-ignore
 const SingleBook = ({query}) => {
-    const classes = useStyles()
+    const classes = useInformationStyles()
     const id = get(query, 'id')
 
-    const returnPictures = (): MediaI[] | undefined=>{
+    const returnPictures = (): MediaI[] | undefined => {
         if (data?.book.photos) {
             return (data?.book.photos.map((photo) => {
                 return {source: photo.uri}
             }))
-        }else{
+        } else {
             return [{source: '/imageNotFound.svg'}]
         }
     }
@@ -62,28 +43,26 @@ const SingleBook = ({query}) => {
 
     return (
         <div className={classes.root}>
-            <div className={classes.imgContainer}>
-                <AwesomeSlider
-                    media={returnPictures()}
-                />
-            </div>
-            <Typography variant={'h4'}>Title: {data?.book.title}</Typography>
-            <Typography variant={'h5'}>Author: {data?.book.author.name}</Typography>
-            <Typography variant={'h5'}>Chapters: {data?.book.chapters.map((chapter)=>{
-                return(`${chapter.title.match(/\d+/)} `)
+            <AwesomeSlider
+                media={returnPictures()}
+            />
+            <Typography variant={'h4'}>Title</Typography>
+            <a className={classes.link}>{data?.book.title}</a>
+            <Typography variant={'h4'}>Author</Typography>
+            <Link href={`/authors/${data?.book.author.id}`}>
+                <a className={classes.link}>{data?.book.author.name}</a>
+            </Link>
+            <Typography variant={'h4'}>Chapters</Typography>
+            <a className={classes.link}>{data?.book.chapters[0].title.match(/\d+/)}</a>
+            <Typography variant={'h5'}>Where to Buy</Typography>
+            {data?.book.stores.map((store, index) => {
+                return (
+                    <div key={index}>
+                        <a className={classes.link}>{store.name}</a>
+                        <a className={classes.link}>{store.address}</a>
+                    </div>
+                )
             })}
-            </Typography>
-            <Typography variant={'h5'}>Where to Buy:</Typography>
-            <div className={classes.adressContainer}>
-                {data?.book.stores.map((store, index)=>{
-                    return(
-                        <div key={index}>
-                            <Typography variant={'h6'}>{store.name}</Typography>
-                            <Typography variant={'h6'}>{store.address}</Typography>
-                        </div>
-                    )
-                })}
-            </div>
 
         </div>
     );
